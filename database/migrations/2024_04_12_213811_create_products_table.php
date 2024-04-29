@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('image')->nullable();
-            $table->string('price');
-            $table->string('quantity');
+            $table->float('price');
+            $table->integer('quantity');
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('sub_category_id')->constrained('sub_categories')->cascadeOnDelete();
             $table->softDeletes();

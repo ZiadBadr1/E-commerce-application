@@ -21,4 +21,9 @@ class Product extends Model
         return $this->belongsTo(SubCategory::class,'sub_category_id');
     }
 
+    public function image():string
+    {
+        return  $this->image ? asset('storage/'.$this->image) : asset('admin/img/man.png');
+    }
+
 }

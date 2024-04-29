@@ -2,33 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
+use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Service\ProductService;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    protected ProductService $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+
+
     public function index()
     {
-        //
+        $products = $this->productService->getAll();
+        return view('admin.product.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.product.create', [
+            'categories' => Category::get(),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $this->productService->create($request->validated());
+        return redirect()->back()->with('success', 'Created Successfully');
     }
 
     /**
@@ -44,15 +50,19 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.product.edit', [
+            'categories' => Category::get(),
+            'product' => $product
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $this->productService->update($request->validated(), $product);
+        return redirect()->back()->with('success', 'Updated Successfully');
     }
 
     /**
@@ -60,6 +70,15 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $this->productService->delete($product);
+        return redirect()->back()->with('success', 'Deleted Successfully');
     }
+
+    public function getSubCategories($id)
+    {
+//        dd($this->productService->getSubCategory($id));
+//        response()->json
+        return response()->json($this->productService->getSubCategory($id));
+    }
+
 }

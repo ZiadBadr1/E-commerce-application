@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,4 +39,15 @@ Route::group([
 ],function ()
 {
     Route::resource('sub-category',SubCategoryController::class);
+});
+
+Route::group([
+    'prefix'=>'admin',
+    'as' => 'admin.',
+    'middleware' => ['auth']
+],function ()
+{
+    Route::resource('product',ProductController::class);
+    Route::get('/sub_categories/{id}', [ProductController::class, 'getSubCategories']);
+
 });
