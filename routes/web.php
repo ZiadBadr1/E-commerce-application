@@ -20,14 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('dashboard');
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group([
     'prefix'=>'admin',
     'as' => 'admin.',
-    'middleware' => ['auth']
+//    'middleware' => ['auth']
 ],function ()
 {
     Route::resource('category',CategoryController::class);
@@ -35,7 +34,7 @@ Route::group([
 Route::group([
     'prefix'=>'admin',
     'as' => 'admin.',
-    'middleware' => ['auth']
+//    'middleware' => ['auth']
 ],function ()
 {
     Route::resource('sub-category',SubCategoryController::class);
@@ -44,7 +43,7 @@ Route::group([
 Route::group([
     'prefix'=>'admin',
     'as' => 'admin.',
-    'middleware' => ['auth']
+//    'middleware' => ['auth']
 ],function ()
 {
     Route::resource('product',ProductController::class);
