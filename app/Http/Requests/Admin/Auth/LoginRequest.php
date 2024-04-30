@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','unique:categories,name'],
-            'icon' => ['required','image','mimes:jpg,png,jpeg'],
-            'description' => ['required'],
+            'email' => ['required','email','exists:admins,email'],
+            'password' => ['required'],
         ];
     }
 }

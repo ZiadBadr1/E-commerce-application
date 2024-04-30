@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Product\ProductController;
+use App\Http\Controllers\Admin\SubCategory\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,33 +20,3 @@ Route::get('/', function () {
     return view('welcome');
 })->name('dashboard');
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::group([
-    'prefix'=>'admin',
-    'as' => 'admin.',
-//    'middleware' => ['auth']
-],function ()
-{
-    Route::resource('category',CategoryController::class);
-});
-Route::group([
-    'prefix'=>'admin',
-    'as' => 'admin.',
-//    'middleware' => ['auth']
-],function ()
-{
-    Route::resource('sub-category',SubCategoryController::class);
-});
-
-Route::group([
-    'prefix'=>'admin',
-    'as' => 'admin.',
-//    'middleware' => ['auth']
-],function ()
-{
-    Route::resource('product',ProductController::class);
-    Route::get('/sub_categories/{id}', [ProductController::class, 'getSubCategories']);
-
-});

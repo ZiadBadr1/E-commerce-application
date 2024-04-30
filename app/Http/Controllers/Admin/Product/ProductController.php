@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Product;
 
-use App\Http\Requests\ProductRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Product\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Service\ProductService;

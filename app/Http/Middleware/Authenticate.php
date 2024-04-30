@@ -12,6 +12,12 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->expectsJson() ? null : route('login');
+//        dd($request);
+        if (\Auth::guard('web')->check()){
+            return 'user';
+        }elseif (\Auth::guard('admin')->check()){
+            return route('admin.login-form');
+        }
+        return route('admin.login-form');
     }
 }

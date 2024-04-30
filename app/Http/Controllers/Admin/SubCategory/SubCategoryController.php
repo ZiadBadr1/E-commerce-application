@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\SubCategory;
 
-use App\Http\Requests\SubCategoryRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\SubCategory\SubCategoryRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Service\subCategoryService;
